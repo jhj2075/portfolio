@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>전형준 | Portfolio</title>
+<style>
+@import "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css";
+
+/* ══════════════════════════════════════
+   RESET & ROOT
+══════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nf-red:#00D2A8;          /* 현대퓨처넷 에메랄드 */
+  --nf-red-hover:#00997A;    /* hover */
+  --bg:#071412;              /* 딥 다크 그린 */
+  --bg-card:#0D1E1B;         /* 카드 배경 */
+  --bg-modal:#102522;        /* 모달 배경 */
+  --text:#ffffff;
+  --text-muted:#9CCBC2;
+  --text-dim:#5F8F86;
+  --border:#1F4D46;
+  --ff:'Pretendard Variable',Pretendard,sans-serif;
+  --nav-h:68px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--ff);overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;font-family:var(--ff)}
+img{display:block;max-width:100%}
+
+/* ══════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════ */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#444;border-radius:3px}
+
+/* ══════════════════════════════════════
+   NAVBAR — 넷플릭스 상단바
+══════════════════════════════════════ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4%;
+  background:linear-gradient(to bottom,rgba(0,0,0,.85) 0%,transparent 100%);
+  transition:background .4s;
+}
+.navbar.solid{background:rgba(20,20,20,.97)}
+.nav-logo{
+  font-size:1.7rem;font-weight:900;color:var(--nf-red);
+  letter-spacing:-.02em;margin-right:2.5rem;flex-shrink:0;
+  font-style:italic;
+}
+.nav-links{display:flex;gap:1.25rem;align-items:center}
+.nav-links a{
+  font-size:.82rem;color:rgba(255,255,255,.75);
+  transition:color .2s;font-weight:500;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-right{display:flex;align-items:center;gap:1.25rem}
+.nav-search{
+  background:none;border:none;color:#fff;
+  font-size:1.1rem;padding:.35rem;opacity:.8;
+  transition:opacity .2s;
+}
+.nav-search:hover{opacity:1}
+.nav-avatar{
+  width:34px;height:34px;border-radius:5px;
+  background:linear-gradient(135deg,var(--nf-red),#8B0000);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:900;cursor:pointer;
+  flex-shrink:0;
+}
+
+/* ══════════════════════════════════════
+   HERO BILLBOARD
+══════════════════════════════════════ */
+.billboard{
+  position:relative;
+  height:100vh;min-height:600px;
+  display:flex;align-items:flex-end;
+  padding:0 4% 12%;
+  overflow:hidden;
+}
+
+/* 배경 — 그라디언트 신원 카드 */
+.billboard-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right,rgba(20,20,20,.9) 30%,transparent 70%),
+    linear-gradient(to top,rgba(20,20,20,1) 0%,rgba(20,20,20,.5) 30%,transparent 60%),
+    linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 40%,#16213e 70%,#0f3460 100%);
+  z-index:0;
+}
+@keyframes codeFloat{
+  from{transform:translateY(-50%) translateX(0)}
+  to{transform:translateY(-53%) translateX(-8px)}
+}
+
+.billboard-top-badge{
+  position:absolute;top:8rem;left:4%;z-index:1;
+  display:flex;align-items:center;gap:.5rem;
+}
+.nf-top10{
+  background:var(--nf-red);color:#fff;
+  font-size:.65rem;font-weight:900;padding:.2rem .5rem;
+  border-radius:3px;letter-spacing:.08em;
+}
+.nf-rank-text{font-size:.82rem;font-weight:600;color:#fff}
+
+.billboard-content{position:relative;z-index:1;max-width:520px}
+
+.billboard-genre{
+  font-size:.72rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--nf-red);
+  margin-bottom:.75rem;
+}
+.billboard-name{
+  font-size:clamp(3.5rem,8vw,6.5rem);
+  font-weight:900;line-height:.9;
+  letter-spacing:-.04em;margin-bottom:.5rem;
+  text-shadow:2px 4px 20px rgba(0,0,0,.8);
+}
+.billboard-name span{color:var(--nf-red)}
+.billboard-subtitle{
+  font-size:1.1rem;color:rgba(255,255,255,.75);
+  margin-bottom:1.25rem;font-weight:400;
+}
+.billboard-meta{
+  display:flex;align-items:center;gap:.75rem;
+  margin-bottom:1.5rem;flex-wrap:wrap;
+}
+.match-score{color:#46d369;font-weight:700;font-size:.9rem}
+.badge-year,.badge-rating,.badge-duration{
+  font-size:.78rem;color:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.4);
+  padding:.1rem .45rem;border-radius:2px;
+}
+.badge-rating{border-color:rgba(255,255,255,.6);color:#fff}
+.billboard-desc{
+  font-size:.92rem;color:rgba(255,255,255,.75);
+  line-height:1.7;margin-bottom:2rem;
+  display:-webkit-box;-webkit-line-clamp:3;
+  -webkit-box-orient:vertical;overflow:hidden;
+}
+.billboard-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+
+.btn-play{
+  display:flex;align-items:center;gap:.55rem;
+  background:#fff;color:#000;
+  padding:.7rem 1.75rem;border-radius:4px;
+  font-size:.95rem;font-weight:700;border:none;
+  transition:background .2s;
+}
+.btn-play:hover{background:rgba(255,255,255,.8)}
+.btn-play .ico{font-size:1.1rem}
+
+.btn-info{
+  display:flex;align-items:center;gap:.55rem;
+  background:rgba(109,109,110,.7);color:#fff;
+  padding:.7rem 1.6rem;border-radius:4px;
+  font-size:.95rem;font-weight:600;border:none;
+  backdrop-filter:blur(4px);
+  transition:background .2s;
+}
+.btn-info:hover{background:rgba(109,109,110,.5)}
+
+/* ══════════════════════════════════════
+   SECTION ROW — 넷플릭스 콘텐츠 행
+══════════════════════════════════════ */
+.section-row{
+  padding:0 4%;margin-bottom:3.5rem;
+  position:relative;
+}
+.row-title{
+  font-size:1.1rem;font-weight:700;
+  margin-bottom:1rem;color:#e5e5e5;
+  display:flex;align-items:center;gap:.75rem;
+}
+.row-title .explore{
+  font-size:.78rem;color:#54b9c5;font-weight:600;
+  opacity:0;transition:opacity .25s;cursor:pointer;
+}
+.section-row:hover .explore{opacity:1}
+.row-title .explore:hover{text-decoration:underline}
+#projects{
+  position:relative;
+  z-index:20;
+}
+#skills,#experience,#awards,#contact,footer{
+  position:relative;
+  z-index:1;
+}
+
+/* 카드 슬라이더 */
+.card-slider{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:.35rem;
+  overflow:visible;
+}
+
+/* ══════════════════════════════════════
+   PROJECT CARD
+══════════════════════════════════════ */
+.project-card{
+  position:relative;border-radius:4px;
+  overflow:visible;cursor:pointer;
+  transition:transform .35s cubic-bezier(.4,0,.2,1),z-index 0s .35s;
+}
+.project-card:hover{
+  transform:scale(1.26);z-index:1000;
+  transition:transform .35s cubic-bezier(.4,0,.2,1),z-index 0s;
+}
+/* 양 끝 카드 overflow fix */
+.card-slider .project-card:first-child:hover{transform:scale(1.26) translateX(10%);}
+.card-slider .project-card:last-child:hover{transform:scale(1.26) translateX(-10%);}
+
+.card-thumb{
+  width:100%;aspect-ratio:16/9;border-radius:4px;
+  position:relative;overflow:hidden;
+  background:var(--bg-card);
+}
+.card-thumb-inner{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  position:relative;
+  transition:filter .35s;
+}
+.project-card:hover .card-thumb-inner{filter:brightness(.5)}
+.card-label{
+  position:absolute;bottom:.5rem;left:.6rem;
+  font-size:.78rem;font-weight:800;letter-spacing:.04em;
+  text-shadow:0 2px 6px rgba(0,0,0,.9);
+}
+.card-badge{
+  position:absolute;top:.5rem;left:.5rem;
+  background:var(--nf-red);color:#fff;
+  font-size:.6rem;font-weight:900;padding:.15rem .4rem;
+  border-radius:2px;letter-spacing:.08em;
+}
+
+/* 카드 아이콘 (SVG 대신 이모지 아트) */
+.thumb-art{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:3rem;
+  background-size:cover;background-position:center;
+}
+
+/* hover 패널 */
+.card-hover-panel{
+  position:absolute;top:100%;left:0;right:0;
+  background:rgb(7,20,18);
+  border-radius:0 0 6px 6px;
+  padding:1rem;z-index:1001;
+  display:none;pointer-events:none;
+  box-shadow:0 10px 28px rgba(0,0,0,.95);
+  border:1px solid var(--border);border-top:none;
+  isolation:isolate;
+}
+.project-card:hover .card-hover-panel{display:block;pointer-events:auto}
+.card-hover-panel::before{
+  content:"";
+  position:absolute;inset:0;
+  background:rgb(7,20,18);
+  border-radius:0 0 6px 6px;
+  z-index:-1;
+}
+
+.panel-actions{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.panel-btn{
+  width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);
+  background:transparent;color:#fff;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s,background .2s;
+}
+.panel-btn:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+.panel-btn.play{
+  background:#fff;color:#000;border-color:#fff;font-size:1rem;
+}
+.panel-btn.play:hover{background:rgba(255,255,255,.85)}
+.panel-btn-add{margin-right:auto}
+.panel-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem}
+.ptag{
+  font-size:.65rem;font-weight:700;
+  color:rgba(255,255,255,.6);letter-spacing:.04em;
+}
+.ptag::after{content:'·';margin-left:.4rem;color:rgba(255,255,255,.3)}
+.ptag:last-child::after{display:none}
+.panel-title{font-size:.88rem;font-weight:700;margin-bottom:.25rem}
+.panel-desc{font-size:.75rem;color:var(--text-muted);line-height:1.55}
+
+/* ══════════════════════════════════════
+   SKILL ROW — 넷플릭스 장르 버튼 형식
+══════════════════════════════════════ */
+.skill-pills{
+  display:flex;flex-wrap:wrap;gap:.5rem;
+  padding:0 4%;margin-bottom:4rem;
+}
+.skill-pill{
+  padding:.45rem 1.1rem;
+  border-radius:3px;
+  font-size:.8rem;font-weight:600;
+  border:1.5px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.8);
+  background:transparent;
+  transition:border-color .2s,color .2s,background .2s;
+  cursor:default;
+}
+.skill-pill:hover{
+  border-color:rgba(255,255,255,.7);
+  color:#fff;background:rgba(255,255,255,.08);
+}
+.skill-pill.hot{
+  border-color:var(--nf-red);color:var(--nf-red);
+}
+.skill-pill.hot:hover{background:rgba(229,9,20,.1)}
+
+/* ══════════════════════════════════════
+   EXPERIENCE TIMELINE ROW
+══════════════════════════════════════ */
+.exp-cards{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:.35rem;padding:0 4%;margin-bottom:4rem;
+}
+.exp-card{
+  background:var(--bg-card);border-radius:4px;
+  padding:1.75rem 1.5rem;border:1px solid var(--border);
+  transition:border-color .25s,transform .25s;cursor:default;
+  position:relative;overflow:hidden;
+}
+.exp-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:3px;background:var(--nf-red);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.exp-card:hover::before{transform:scaleX(1)}
+.exp-card:hover{border-color:#555;transform:translateY(-3px)}
+.exp-period{
+  font-size:.68rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--nf-red);margin-bottom:.6rem;
+}
+.exp-role{font-size:1rem;font-weight:700;margin-bottom:.2rem}
+.exp-org{font-size:.82rem;color:var(--text-muted);margin-bottom:.9rem}
+.exp-bullets{display:flex;flex-direction:column;gap:.35rem}
+.exp-bullets li{
+  font-size:.8rem;color:var(--text-muted);line-height:1.6;
+  padding-left:.9rem;position:relative;
+}
+.exp-bullets li::before{
+  content:'▸';position:absolute;left:0;
+  color:var(--nf-red);font-size:.65rem;top:.1rem;
+}
+
+/* ══════════════════════════════════════
+   AWARDS ROW
+══════════════════════════════════════ */
+.award-row{
+  display:flex;align-items:center;gap:1.25rem;
+  padding:1rem 1.5rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background .2s;cursor:default;
+}
+.award-row:hover{background:rgba(255,255,255,.04)}
+.award-num{
+  font-size:2.5rem;font-weight:900;color:rgba(255,255,255,.08);
+  min-width:3rem;text-align:center;line-height:1;
+}
+.award-thumb{
+  width:60px;height:60px;border-radius:4px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;
+}
+.award-info{flex:1}
+.award-title{font-size:.9rem;font-weight:700;margin-bottom:.25rem}
+.award-org{font-size:.78rem;color:var(--text-muted)}
+.award-date{font-size:.72rem;color:var(--text-dim)}
+.award-badge{
+  background:var(--nf-red);color:#fff;
+  font-size:.65rem;font-weight:900;
+  padding:.2rem .55rem;border-radius:2px;
+  letter-spacing:.06em;flex-shrink:0;
+}
+
+/* ══════════════════════════════════════
+   CONTACT — 하단 섹션
+══════════════════════════════════════ */
+.contact-section{
+  padding:5rem 4%;
+  background:linear-gradient(to top,rgba(0,0,0,.8),transparent),
+             var(--bg-card);
+  border-top:1px solid var(--border);
+}
+.contact-label{
+  font-size:.72rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--nf-red);margin-bottom:1rem;
+}
+.contact-headline{
+  font-size:clamp(2rem,5vw,3.5rem);font-weight:900;
+  margin-bottom:1rem;line-height:1.1;
+}
+.contact-desc{
+  font-size:.95rem;color:var(--text-muted);
+  margin-bottom:2rem;max-width:480px;line-height:1.7;
+}
+.contact-links{
+  display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:3rem;
+}
+.contact-link{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.65rem 1.25rem;
+  background:rgba(255,255,255,.07);border:1px solid var(--border);
+  border-radius:4px;font-size:.82rem;font-weight:600;
+  color:rgba(255,255,255,.8);
+  transition:background .2s,border-color .2s,color .2s;
+}
+.contact-link:hover{
+  background:rgba(229,9,20,.15);
+  border-color:var(--nf-red);color:#fff;
+}
+.contact-link .ico{font-size:1rem}
+.contact-btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--nf-red);color:#fff;
+  padding:.8rem 2rem;border-radius:4px;
+  font-size:.92rem;font-weight:700;border:none;
+  transition:background .2s,transform .15s;
+}
+.contact-btn:hover{background:var(--nf-red-hover);transform:scale(1.02)}
+
+/* ══════════════════════════════════════
+   MODAL — 넷플릭스 상세 팝업
+══════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);
+  z-index:9000;display:flex;align-items:center;justify-content:center;
+  padding:2rem;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+
+.modal{
+  background:var(--bg-modal);border-radius:8px;
+  width:100%;max-width:850px;max-height:90vh;
+  overflow-y:auto;position:relative;
+  transform:scale(.9);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 20px 60px rgba(0,0,0,.9);
+}
+.modal-overlay.open .modal{transform:scale(1)}
+
+.modal-hero{
+  position:relative;width:100%;aspect-ratio:16/7;
+  overflow:hidden;border-radius:8px 8px 0 0;
+  display:flex;align-items:flex-end;
+}
+.modal-hero-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:6rem;
+}
+.modal-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,var(--bg-modal) 0%,transparent 60%),
+             linear-gradient(to right,rgba(0,0,0,.4),transparent);
+}
+.modal-hero-content{position:relative;z-index:1;padding:2rem 2.5rem 1.5rem}
+.modal-title{
+  font-size:clamp(2rem,5vw,3.5rem);font-weight:900;
+  letter-spacing:-.03em;margin-bottom:.5rem;
+  text-shadow:0 2px 10px rgba(0,0,0,.8);
+}
+.modal-actions{display:flex;gap:.65rem;flex-wrap:wrap}
+.modal-close{
+  position:absolute;top:1rem;right:1rem;z-index:10;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(20,20,20,.85);border:1.5px solid rgba(255,255,255,.4);
+  color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s;
+}
+.modal-close:hover{border-color:#fff}
+
+.modal-body{padding:1.75rem 2.5rem 2.5rem}
+.modal-meta-row{
+  display:flex;align-items:center;gap:.75rem;
+  margin-bottom:1.25rem;flex-wrap:wrap;
+}
+.m-match{color:#46d369;font-weight:700}
+.m-year,.m-hd{
+  font-size:.8rem;color:rgba(255,255,255,.6);
+  border:1px solid rgba(255,255,255,.35);
+  padding:.1rem .4rem;border-radius:2px;
+}
+.modal-grid{display:grid;grid-template-columns:1fr auto;gap:2rem}
+.modal-desc{font-size:.92rem;color:rgba(255,255,255,.75);line-height:1.75}
+.modal-tags-section{}
+.modal-tag-row{font-size:.82rem;margin-bottom:.5rem}
+.modal-tag-row span:first-child{color:var(--text-dim)}
+.modal-tag-row span+span{color:rgba(255,255,255,.8)}
+
+.modal-more{margin-top:2.5rem}
+.modal-more-title{
+  font-size:1.1rem;font-weight:700;
+  margin-bottom:1rem;padding-bottom:.75rem;
+  border-bottom:1px solid var(--border);
+}
+.modal-more-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;
+}
+.modal-more-card{
+  background:var(--bg-card);border-radius:4px;overflow:hidden;cursor:pointer;
+  transition:transform .2s;border:1px solid var(--border);
+}
+.modal-more-card:hover{transform:scale(1.03)}
+.modal-more-thumb{
+  aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+  font-size:2rem;background:rgba(255,255,255,.04);
+}
+.modal-more-info{padding:.6rem .75rem}
+.modal-more-info p{font-size:.78rem;font-weight:600}
+.modal-more-info span{font-size:.7rem;color:var(--text-muted)}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{
+  padding:3rem 4% 4rem;
+  border-top:1px solid var(--border);
+}
+.footer-logo{
+  font-size:1.2rem;font-weight:900;color:var(--nf-red);
+  font-style:italic;margin-bottom:1.5rem;
+}
+.footer-links{display:flex;flex-wrap:wrap;gap:.75rem 2rem;margin-bottom:1.5rem}
+.footer-links a{font-size:.78rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:.75rem;color:var(--text-dim)}
+
+/* ══════════════════════════════════════
+   DIVIDER — "TOP 10" 스타일 구분
+══════════════════════════════════════ */
+.top10-divider{
+  display:flex;align-items:center;gap:.75rem;
+  padding:0 4%;margin-bottom:1rem;
+}
+.top10-box{
+  background:var(--nf-red);color:#fff;
+  font-size:.6rem;font-weight:900;padding:.2rem .45rem;border-radius:2px;
+  letter-spacing:.08em;
+}
+.top10-text{font-size:.82rem;font-weight:600}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media(max-width:768px){
+  .navbar{padding:0 3%}
+  .nav-links{display:none}
+  .billboard{padding:0 3% 18%}
+  .section-row,.skill-pills,.exp-cards,.contact-section{padding-left:3%;padding-right:3%}
+  .card-slider{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .project-card:hover{transform:scale(1.12)}
+  .modal-grid{grid-template-columns:1fr}
+  .modal-more-grid{grid-template-columns:repeat(2,1fr)}
+  .modal{border-radius:4px}
+  .modal-body{padding:1.25rem 1.5rem 2rem}
+  .modal-hero-content{padding:1.25rem 1.5rem 1rem}
+}
+
+/* ══════════════════════════════════════
+   FADE-IN ANIMATION
+══════════════════════════════════════ */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ══════ NAVBAR ══════ -->
+<nav class="navbar" id="navbar">
+  <div style="display:flex;align-items:center;gap:2.5rem">
+    <span class="nav-logo">PORTFLIX</span>
+    <div class="nav-links">
+      <a href="#" class="active">홈</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#skills">기술스택</a>
+      <a href="#experience">경력</a>
+      <a href="#awards">수상</a>
+      <a href="#contact">연락처</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="nav-search" aria-label="검색">🔍</button>
+    <div class="nav-avatar">HJ</div>
+  </div>
+</nav>
+
+<!-- ══════ HERO BILLBOARD ══════ -->
+<section class="billboard">
+  <div class="billboard-bg"></div>
+
+  <div class="billboard-top-badge">
+    <span class="nf-top10">TOP</span>
+    <span class="nf-rank-text">3조</span>
+  </div>
+
+  <div class="billboard-content">
+    <div class="billboard-genre">Backend Developer</div>
+    <div class="billboard-name">전<span>형준</span></div>
+    <div class="billboard-subtitle">기초를 중시하는 개발자</div>
+    <div class="billboard-meta">
+      <span class="badge-year">2026</span>
+      <span class="badge-duration">프로젝트 4개</span>
+    </div>
+    <p class="billboard-desc">
+      성실하게 배우고 구현합니다.
+      학습, 책임감, 협업까지 —
+      꾸준한 성장으로 증명합니다.
+    </p>
+    <div class="billboard-actions">
+      <button class="btn-play" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <span class="ico">▶</span> 연락하기
+      </button>
+      <button class="btn-info" onclick="openModal('main')">
+        <span>ⓘ</span> 상세 정보
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PROJECTS ROW ══════ -->
+<section style="padding-top:2rem" id="projects">
+  <div class="top10-divider fade-up">
+    <span class="top10-box">TOP 4</span>
+    <span class="top10-text">오늘의 주요 프로젝트</span>
+  </div>
+  <div class="section-row fade-up">
+    <div class="row-title">
+      선택된 프로젝트
+      <span class="explore">모두 보기 ›</span>
+    </div>
+    <div class="card-slider">
+
+      <!-- 카드 1 -->
+      <div class="project-card" onclick="openModal('p1')">
+        <div class="card-thumb">
+          <div class="card-thumb-inner">
+            <div class="thumb-art" style="background:linear-gradient(135deg,#0d1117,#14213d,#fca311)">₿</div>
+          </div>
+          <span class="card-label">BitOracle</span>
+          <span class="card-badge">최신</span>
+        </div>
+        <div class="card-hover-panel">
+          <div class="panel-actions">
+            <button class="panel-btn play" onclick="event.stopPropagation();openModal('p1')">▶</button>
+            <button class="panel-btn panel-btn-add">＋</button>
+            <button class="panel-btn">👍</button>
+            <button class="panel-btn" style="margin-left:auto">⌄</button>
+          </div>
+          <div class="panel-tags">
+            <span class="ptag">Spring</span>
+            <span class="ptag">WebSocket</span>
+            <span class="ptag">AWS</span>
+          </div>
+          <div class="panel-title">BitOracle</div>
+          <div class="panel-desc">가상자산 데이터 분석 및 정보 공유 플랫폼</div>
+        </div>
+      </div>
+
+      <!-- 카드 2 -->
+      <div class="project-card" onclick="openModal('p2')">
+        <div class="card-thumb">
+          <div class="card-thumb-inner">
+            <div class="thumb-art" style="background:linear-gradient(135deg,#071412,#0d4f3f,#00d2a8)">⚡</div>
+          </div>
+          <span class="card-label">GreenSpark</span>
+        </div>
+        <div class="card-hover-panel">
+          <div class="panel-actions">
+            <button class="panel-btn play" onclick="event.stopPropagation();openModal('p2')">▶</button>
+            <button class="panel-btn panel-btn-add">＋</button>
+            <button class="panel-btn">👍</button>
+            <button class="panel-btn" style="margin-left:auto">⌄</button>
+          </div>
+          <div class="panel-tags">
+            <span class="ptag">Spring Boot</span>
+            <span class="ptag">FastAPI</span>
+            <span class="ptag">MySQL</span>
+          </div>
+          <div class="panel-title">GreenSpark</div>
+          <div class="panel-desc">전력 사용량과 요금을 분석하는 지속 가능 서비스</div>
+        </div>
+      </div>
+
+      <!-- 카드 3 -->
+      <div class="project-card" onclick="openModal('p3')">
+        <div class="card-thumb">
+          <div class="card-thumb-inner">
+            <div class="thumb-art" style="background:linear-gradient(135deg,#0a0a1a,#1a1a3f,#2d4a8f)">🏃</div>
+          </div>
+          <span class="card-label">STEW</span>
+        </div>
+        <div class="card-hover-panel">
+          <div class="panel-actions">
+            <button class="panel-btn play" onclick="event.stopPropagation();openModal('p3')">▶</button>
+            <button class="panel-btn panel-btn-add">＋</button>
+            <button class="panel-btn">👍</button>
+            <button class="panel-btn" style="margin-left:auto">⌄</button>
+          </div>
+          <div class="panel-tags">
+            <span class="ptag">Spring Boot</span>
+            <span class="ptag">S3</span>
+            <span class="ptag">MySQL</span>
+          </div>
+          <div class="panel-title">STEW</div>
+          <div class="panel-desc">운동 튜터와 튜티를 연결하는 스포츠 매칭 서비스</div>
+        </div>
+      </div>
+
+      <!-- 카드 4 -->
+      <div class="project-card" onclick="openModal('p4')">
+        <div class="card-thumb">
+          <div class="card-thumb-inner">
+            <div class="thumb-art" style="background:linear-gradient(135deg,#1a0a0a,#3f1a1a,#6b2020)">🗺️</div>
+          </div>
+          <span class="card-label">현장실습 인턴십</span>
+        </div>
+        <div class="card-hover-panel">
+          <div class="panel-actions">
+            <button class="panel-btn play" onclick="event.stopPropagation();openModal('p4')">▶</button>
+            <button class="panel-btn panel-btn-add">＋</button>
+            <button class="panel-btn">👍</button>
+            <button class="panel-btn" style="margin-left:auto">⌄</button>
+          </div>
+          <div class="panel-tags">
+            <span class="ptag">Spring</span>
+            <span class="ptag">JavaScript</span>
+            <span class="ptag">GIS</span>
+          </div>
+          <div class="panel-title">현장실습 인턴십</div>
+          <div class="panel-desc">공공기관 GIS 시스템과 산불 대시보드 개발 및 유지보수</div>
+        </div>
+      </div>
+
+    </div><!-- /card-slider -->
+  </div>
+</section>
+
+<!-- ══════ SKILLS ROW ══════ -->
+<section id="skills" style="padding-top:1rem">
+  <div class="section-row fade-up">
+    <div class="row-title">기술 스택</div>
+  </div>
+  <div class="skill-pills fade-up">
+    <span class="skill-pill hot">Java</span>
+    <span class="skill-pill hot">Spring Boot</span>
+    <span class="skill-pill hot">JDBC</span>
+    <span class="skill-pill hot">MySQL</span>
+    <span class="skill-pill hot">ORACLE</span>
+    <span class="skill-pill hot">AWS</span>
+    <span class="skill-pill">JavaScript</span>
+    <span class="skill-pill">Python</span>
+    <span class="skill-pill">C</span>
+    <span class="skill-pill">Django</span>
+    <span class="skill-pill">FastAPI</span>
+    <span class="skill-pill">PostgreSQL</span>
+    <span class="skill-pill hot">Git/GitHub</span>
+    <span class="skill-pill">Jira</span>
+  </div>
+</section>
+
+<!-- ══════ EXPERIENCE ROW ══════ -->
+<section id="experience">
+  <div class="section-row fade-up">
+    <div class="row-title">경력 · 교육</div>
+  </div>
+  <div class="exp-cards fade-up">
+
+    <div class="exp-card">
+      <div class="exp-period">2025.08 — 2025.12</div>
+      <div class="exp-role">웹 서비스 개발 인턴</div>
+      <div class="exp-org">선도소프트</div>
+      <ul class="exp-bullets">
+      	<li>국립수산과학원 관측소 데이터 관리 기능 개발</li>
+		<li>기관/지역별 관측소 필터링 및 동적 UI 처리 구현</li>
+        <li>산불 상황 모니터링 대시보드 개발 및 유지보수</li>
+		<li>GeoJSON 기반 지도 레이어 기능 구현</li>
+		<li>기상/AWS 데이터 시각화 및 지역 필터링 개발</li>		
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ AWARDS ROW ══════ -->
+<section id="awards">
+  <div class="section-row fade-up">
+    <div class="row-title">수상 경력</div>
+  </div>
+  <div style="padding:0 4%;margin-bottom:4rem" class="fade-up">
+    <div style="background:var(--bg-card);border-radius:6px;border:1px solid var(--border);overflow:hidden">
+
+      <div class="award-row">
+        <div class="award-num">01</div>
+        <div class="award-thumb" style="background:linear-gradient(135deg,#1a1f35,#0f4c75)">🏅</div>
+        <div class="award-info">
+          <div class="award-title">교내 개발 동아리 프로젝트 성과 보고회</div>
+          <div class="award-org">숭실대학교 멋쟁이사자처럼</div>
+        </div>
+        <div style="text-align:center">
+          <div class="award-badge">대상</div>
+          <div class="award-date" style="margin-top:.4rem">2024.12.19</div>
+        </div>
+      </div>
+
+      <div class="award-row">
+        <div class="award-num">02</div>
+        <div class="award-thumb" style="background:linear-gradient(135deg,#1a2f1a,#0a4a2a)">🥉</div>
+        <div class="award-info">
+          <div class="award-title">ESD 비교과 공모전</div>
+          <div class="award-org">숭실대학교</div>
+        </div>
+        <div style="text-align:center">
+          <div class="award-badge">동상</div>
+          <div class="award-date" style="margin-top:.4rem">2024.12.30</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CONTACT ══════ -->
+<section class="contact-section fade-up" id="contact">
+  <div class="contact-label">Contact</div>
+  <div class="contact-headline">같이 만들어요,<br><span style="color:var(--nf-red)">지금 바로.</span></div>
+  <p class="contact-desc">
+    새로운 기회와 협업에 항상 열려 있습니다.<br>
+    편하게 연락 주세요 :)
+  </p>
+  <div class="contact-links">
+    <a href="mailto:flg989@naver.com" class="contact-link">
+      <span class="ico">📧</span> flg989@naver.com
+    </a>
+    <a href="tel:010-5795-9235" class="contact-link">
+      <span class="ico">📱</span> 010-5795-9235
+    </a>
+    <a href="https://github.com/jhj2075" target="_blank" rel="noopener" class="contact-link">
+      <span class="ico">🐙</span> github.com/jhj2075
+    </a>
+  </div>
+  <a href="mailto:flg989@naver.com" class="contact-btn">
+    ▶ 메일 보내기
+  </a>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="footer-logo">PORTFLIX</div>
+  <div class="footer-links">
+    <a href="https://github.com/jhj2075" target="_blank" rel="noopener">GitHub</a>
+    <a href="mailto:flg989@naver.com">Email</a>
+  </div>
+  <div class="footer-copy">© 2026 전형준. All rights reserved. Made with ❤️ & Netflix vibes.</div>
+</footer>
+
+<!-- ══════ MODAL ══════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-hero" id="modalHero">
+      <div class="modal-hero-bg" id="modalBg"></div>
+      <div class="modal-hero-overlay"></div>
+      <div class="modal-hero-content">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-actions">
+          <button class="btn-play" id="modalDetailBtn" style="font-size:.88rem;padding:.6rem 1.4rem">▶ 자세히 보기</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-meta-row">
+        <span class="m-match" id="modalMatch"></span>
+        <span class="m-year" id="modalYear"></span>
+        <span class="m-hd">프로젝트</span>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-desc" id="modalDesc"></div>
+        <div class="modal-tags-section" id="modalTags"></div>
+      </div>
+      <div class="modal-more" id="modalMore">
+        <div class="modal-more-title">함께 시청된 콘텐츠</div>
+        <div class="modal-more-grid" id="modalMoreGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── NAVBAR SCROLL ── */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('solid',window.scrollY>80);
+},{passive:true});
+
+/* ── FADE-UP OBSERVER ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+/* ── MODAL DATA ── */
+const modals={
+  main:{
+    title:'전형준',
+    bg:'<div style="width:100%;height:100%;background:linear-gradient(135deg,#0a0a0a,#1a1a2e,#0f3460);display:flex;align-items:center;justify-content:center;font-size:5rem">👩‍💻</div>',
+    match:'98% 일치',year:'2026',
+    desc:'기초를 중시하는 신입 백엔드 개발자입니다. 성실한 학습 태도와 프로젝트 경험을 바탕으로 사용자에게 필요한 기능을 끝까지 구현합니다.',
+    link:'https://github.com/jhj2075',
+    tags:'<div class="modal-tag-row"><span>전공: </span><span>숭실대학교 컴퓨터학부</span></div><div class="modal-tag-row"><span>학점: </span><span>4.04 / 4.5</span></div><div class="modal-tag-row"><span>연락처: </span><span>flg989@naver.com</span></div>',
+    more:[
+      {emoji:'₿',title:'BitOracle',sub:'2025 · Spring · WebSocket'},
+      {emoji:'⚡',title:'GreenSpark',sub:'2024 · Spring · FastAPI'},
+      {emoji:'🏃',title:'STEW',sub:'2024 · Spring · AWS'},
+      {emoji:'🗺️',title:'현장실습 인턴십',sub:'2025 · Spring · GIS'},
+    ]
+  },
+  p1:{
+    title:'BitOracle',
+    bg:'<div style="width:100%;height:100%;background:linear-gradient(135deg,#0d1117,#14213d,#fca311);display:flex;align-items:center;justify-content:center;font-size:5rem">₿</div>',
+    match:'백엔드 70%',year:'2025',
+    desc:'가상자산 데이터 분석 및 정보 공유 플랫폼입니다. 실시간 시세, 주요 지표, AI 기반 뉴스 분류, 예측 게임, 커뮤니티 기능을 백엔드 중심으로 구현했습니다.',
+    link:'https://github.com/BitOracle-bitoracle/bitoracle-backend',
+    tags:'<div class="modal-tag-row"><span>기술: </span><span>Spring Boot, MySQL, WebSocket, WebClient, AWS, Swagger</span></div><div class="modal-tag-row"><span>담당: </span><span>로그인/JWT, 뉴스 스케줄링, 지표 조회, 실시간 시세, 예측 기능</span></div><div class="modal-tag-row"><span>역할: </span><span>팀 스케줄링, 협업툴 세팅, ERD 설계, API 명세 작성, EC2 배포</span></div>',
+    more:[
+      {emoji:'⚡',title:'GreenSpark',sub:'전력 사용량 분석 서비스'},
+      {emoji:'🏃',title:'STEW',sub:'스포츠 튜터 매칭 서비스'},
+      {emoji:'🗺️',title:'현장실습 인턴십',sub:'공공기관 GIS 시스템 개발'},
+      {emoji:'👩‍💻',title:'전형준',sub:'신입 백엔드 개발자'},
+    ]
+  },
+  p2:{
+    title:'GreenSpark',
+    bg:'<div style="width:100%;height:100%;background:linear-gradient(135deg,#071412,#0d4f3f,#00d2a8);display:flex;align-items:center;justify-content:center;font-size:5rem">⚡</div>',
+    match:'백엔드 50%',year:'2024',
+    desc:'사용자의 전력 사용량과 전기요금을 분석하고, 에너지 효율이 좋은 가전제품 구매를 돕는 지속 가능 서비스입니다.',
+    link:'https://github.com/GreenSpark-greenspark/greenspark-backend',
+    tags:'<div class="modal-tag-row"><span>기술: </span><span>Spring Boot, FastAPI, MySQL, AWS, OAuth2, JWT</span></div><div class="modal-tag-row"><span>담당: </span><span>전력/요금 API, AI 예측 연동, 에너지 백과, 포인트 기능</span></div><div class="modal-tag-row"><span>역할: </span><span>ERD 설계, API 명세 작성, Spring 프로젝트 세팅, 배포 환경 구성</span></div><div class="modal-tag-row"><span>성과: </span><span>멋쟁이사자처럼 성과보고회 대상, ESD 비교과 공모전 동상</span></div>',
+    more:[
+      {emoji:'₿',title:'BitOracle',sub:'가상자산 데이터 분석 플랫폼'},
+      {emoji:'🏃',title:'STEW',sub:'스포츠 튜터 매칭 서비스'},
+      {emoji:'🗺️',title:'현장실습 인턴십',sub:'공공기관 GIS 시스템 개발'},
+      {emoji:'👩‍💻',title:'전형준',sub:'신입 백엔드 개발자'},
+    ]
+  },
+  p3:{
+    title:'STEW',
+    bg:'<div style="width:100%;height:100%;background:linear-gradient(135deg,#0a0a1a,#1a1a3f,#2d4a8f);display:flex;align-items:center;justify-content:center;font-size:5rem">🏃</div>',
+    match:'백엔드 50%',year:'2024',
+    desc:'운동을 배우고 싶은 튜티와 운동 경험을 나누고 싶은 튜터를 연결하는 스포츠 튜터 매칭 서비스입니다.',
+    link:'https://github.com/STEW-studio/stew-backend',
+    tags:'<div class="modal-tag-row"><span>기술: </span><span>Spring Boot, MySQL, AWS S3, Swagger</span></div><div class="modal-tag-row"><span>담당: </span><span>신청서 작성/조회/삭제/수락 API, 운동명 검색</span></div><div class="modal-tag-row"><span>역할: </span><span>ERD 설계, API 명세 작성, 배포 환경 구성</span></div>',
+    more:[
+      {emoji:'₿',title:'BitOracle',sub:'가상자산 데이터 분석 플랫폼'},
+      {emoji:'⚡',title:'GreenSpark',sub:'전력 사용량 분석 서비스'},
+      {emoji:'🗺️',title:'현장실습 인턴십',sub:'공공기관 GIS 시스템 개발'},
+      {emoji:'👩‍💻',title:'전형준',sub:'신입 백엔드 개발자'},
+    ]
+  },
+  p4:{
+    title:'현장실습 인턴십',
+    bg:'<div style="width:100%;height:100%;background:linear-gradient(135deg,#1a0a0a,#3f1a1a,#6b2020);display:flex;align-items:center;justify-content:center;font-size:5rem">🗺️</div>',
+    match:'실무 경험',year:'2025',
+    desc:'국립수산과학원 통합 GIS 시스템과 국립재난안전연구원 산불 대시보드 등 공공기관 웹 시스템 개발 및 유지보수에 참여했습니다.',
+    link:'',
+    tags:'<div class="modal-tag-row"><span>기술: </span><span>Spring, JavaScript, JSP, MyBatis, GeoServer, GIS</span></div><div class="modal-tag-row"><span>담당: </span><span>검색 기능, 지도 레이어 표출, 지역 필터, 기상/위성 영상 레이어</span></div><div class="modal-tag-row"><span>역할: </span><span>고객 수정 요구사항 반영, UI/UX 개선, 오류 수정 및 기능 추가</span></div>',
+    more:[
+      {emoji:'₿',title:'BitOracle',sub:'가상자산 데이터 분석 플랫폼'},
+      {emoji:'⚡',title:'GreenSpark',sub:'전력 사용량 분석 서비스'},
+      {emoji:'🏃',title:'STEW',sub:'스포츠 튜터 매칭 서비스'},
+      {emoji:'👩‍💻',title:'전형준',sub:'신입 백엔드 개발자'},
+    ]
+  }
+};
+
+function openModal(id){
+  const d=modals[id];if(!d)return;
+  document.getElementById('modalBg').innerHTML=d.bg;
+  document.getElementById('modalTitle').textContent=d.title;
+  document.getElementById('modalMatch').textContent=d.match;
+  document.getElementById('modalYear').textContent=d.year;
+  document.getElementById('modalDesc').textContent=d.desc;
+  document.getElementById('modalTags').innerHTML=d.tags;
+  const detailBtn=document.getElementById('modalDetailBtn');
+  detailBtn.onclick=()=>{
+    if(d.link) window.open(d.link,'_blank','noopener');
+  };
+  detailBtn.disabled=!d.link;
+  detailBtn.style.opacity=d.link?'1':'.45';
+  detailBtn.style.cursor=d.link?'pointer':'default';
+  const mg=document.getElementById('modalMoreGrid');
+  mg.innerHTML=d.more.map(m=>`
+    <div class="modal-more-card">
+      <div class="modal-more-thumb">${m.emoji}</div>
+      <div class="modal-more-info">
+        <p>${m.title}</p>
+        <span>${m.sub}</span>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function handleOverlayClick(e){
+  if(e.target===document.getElementById('modalOverlay'))closeModal();
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
