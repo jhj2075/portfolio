@@ -26,13 +26,72 @@
 }
 html{scroll-behavior:smooth}
 body{
-  background:var(--bg);color:var(--text);
-  font-family:var(--ff);overflow-x:hidden;
+  min-height:100vh;
+  background:#d9dce6;color:var(--text);
+  font-family:var(--ff);overflow:hidden;
 }
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
 button{cursor:pointer;font-family:var(--ff)}
 img{display:block;max-width:100%}
+
+.landscape-stage{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  overflow:hidden;
+}
+.landscape-phone{
+  position:relative;
+  width:min(1060px,calc(100vw - 40px));
+  height:min(596px,calc(100vh - 40px));
+  background:#050505;
+  border:12px solid #151515;
+  border-radius:38px;
+  overflow:hidden;
+  box-shadow:0 28px 70px rgba(10,18,36,.36);
+}
+.phone-rail{
+  position:absolute;top:0;bottom:0;left:0;
+  width:52px;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  padding:18px 0;
+  color:#e9f5f1;
+  background:#050505;
+  font-size:.62rem;font-weight:800;
+  letter-spacing:.04em;
+  z-index:5;
+}
+.phone-rail strong{
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  color:var(--nf-red);
+  font-size:.72rem;
+  letter-spacing:.08em;
+}
+.phone-rail span{
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+}
+.landscape-screen{
+  position:absolute;inset:0 0 0 52px;
+  background:var(--bg);
+  overflow-x:hidden;
+  overflow-y:auto;
+  cursor:grab;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+.landscape-screen.drag-scrolling{
+  cursor:grabbing;
+  user-select:none;
+}
+.landscape-screen a,
+.landscape-screen button{cursor:pointer}
+.landscape-screen::-webkit-scrollbar{width:6px}
+.landscape-screen::-webkit-scrollbar-track{background:var(--bg)}
+.landscape-screen::-webkit-scrollbar-thumb{background:#335f57;border-radius:3px}
 
 /* ══════════════════════════════════════
    SCROLLBAR
@@ -45,7 +104,7 @@ img{display:block;max-width:100%}
    NAVBAR — 넷플릭스 상단바
 ══════════════════════════════════════ */
 .navbar{
-  position:fixed;top:0;left:0;right:0;z-index:900;
+  position:sticky;top:0;left:0;right:0;z-index:900;
   height:var(--nav-h);
   display:flex;align-items:center;justify-content:space-between;
   padding:0 4%;
@@ -84,7 +143,7 @@ img{display:block;max-width:100%}
 ══════════════════════════════════════ */
 .billboard{
   position:relative;
-  height:100vh;min-height:600px;
+  height:520px;min-height:520px;
   display:flex;align-items:flex-end;
   padding:0 4% 12%;
   overflow:hidden;
@@ -105,7 +164,7 @@ img{display:block;max-width:100%}
 }
 
 .billboard-top-badge{
-  position:absolute;top:8rem;left:4%;z-index:1;
+  position:absolute;top:2rem;left:4%;z-index:1;
   display:flex;align-items:center;gap:.5rem;
 }
 .nf-top10{
@@ -113,7 +172,7 @@ img{display:block;max-width:100%}
   font-size:.65rem;font-weight:900;padding:.2rem .5rem;
   border-radius:3px;letter-spacing:.08em;
 }
-.nf-rank-text{font-size:.82rem;font-weight:600;color:#fff}
+.nf-rank-text{font-size:.82rem;font-weight:600;color:#fff;white-space:nowrap}
 
 .billboard-content{position:relative;z-index:1;max-width:520px}
 
@@ -123,7 +182,7 @@ img{display:block;max-width:100%}
   margin-bottom:.75rem;
 }
 .billboard-name{
-  font-size:clamp(3.5rem,8vw,6.5rem);
+  font-size:clamp(3.5rem,8vw,5.6rem);
   font-weight:900;line-height:.9;
   letter-spacing:-.04em;margin-bottom:.5rem;
   text-shadow:2px 4px 20px rgba(0,0,0,.8);
@@ -582,13 +641,18 @@ footer{
 </style>
 </head>
 <body>
+<div class="landscape-stage">
+  <section class="landscape-phone" aria-label="portfolio mobile preview">
+    <aside class="phone-rail" aria-hidden="true">
+    </aside>
+    <div class="landscape-screen">
 
 <!-- ══════ NAVBAR ══════ -->
 <nav class="navbar" id="navbar">
   <div style="display:flex;align-items:center;gap:2.5rem">
     <span class="nav-logo">PORTFLIX</span>
     <div class="nav-links">
-      <a href="#" class="active">홈</a>
+      <a href="#home" class="active">홈</a>
       <a href="#projects">프로젝트</a>
       <a href="#skills">기술스택</a>
       <a href="#experience">경력</a>
@@ -603,12 +667,12 @@ footer{
 </nav>
 
 <!-- ══════ HERO BILLBOARD ══════ -->
-<section class="billboard">
+<section class="billboard" id="home">
   <div class="billboard-bg"></div>
 
   <div class="billboard-top-badge">
     <span class="nf-top10">TOP</span>
-    <span class="nf-rank-text">3조</span>
+    <span class="nf-rank-text">2026 Portfolio</span>
   </div>
 
   <div class="billboard-content">
@@ -905,6 +969,9 @@ footer{
   </div>
   <div class="footer-copy">© 2026 전형준. All rights reserved. Made with ❤️ & Netflix vibes.</div>
 </footer>
+    </div>
+  </section>
+</div>
 
 <!-- ══════ MODAL ══════ -->
 <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
@@ -941,14 +1008,65 @@ footer{
 <script>
 /* ── NAVBAR SCROLL ── */
 const navbar=document.getElementById('navbar');
-window.addEventListener('scroll',()=>{
-  navbar.classList.toggle('solid',window.scrollY>80);
+const scrollRoot=document.querySelector('.landscape-screen')||window;
+scrollRoot.addEventListener('scroll',()=>{
+  const y=scrollRoot===window ? window.scrollY : scrollRoot.scrollTop;
+  navbar.classList.toggle('solid',y>80);
 },{passive:true});
+
+if(scrollRoot!==window){
+  let dragScroll=null;
+
+  scrollRoot.addEventListener('pointerdown',e=>{
+    const interactiveTarget=e.target.closest('a, button, input, textarea, select, .project-card, .modal');
+    if(interactiveTarget)return;
+
+    dragScroll={
+      pointerId:e.pointerId,
+      startY:e.clientY,
+      startTop:scrollRoot.scrollTop
+    };
+    scrollRoot.classList.add('drag-scrolling');
+    scrollRoot.setPointerCapture?.(e.pointerId);
+  });
+
+  scrollRoot.addEventListener('pointermove',e=>{
+    if(!dragScroll || dragScroll.pointerId!==e.pointerId)return;
+    e.preventDefault();
+    scrollRoot.scrollTop=dragScroll.startTop+dragScroll.startY-e.clientY;
+  });
+
+  scrollRoot.addEventListener('pointerup',e=>{
+    if(!dragScroll || dragScroll.pointerId!==e.pointerId)return;
+
+    dragScroll=null;
+    scrollRoot.classList.remove('drag-scrolling');
+    scrollRoot.releasePointerCapture?.(e.pointerId);
+  });
+
+  scrollRoot.addEventListener('pointercancel',()=>{
+    dragScroll=null;
+    scrollRoot.classList.remove('drag-scrolling');
+  });
+}
+
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',e=>{
+    const target=document.querySelector(link.getAttribute('href'));
+    if(!target || scrollRoot===window)return;
+
+    e.preventDefault();
+    scrollRoot.scrollTo({
+      top:target.offsetTop-68,
+      behavior:'smooth'
+    });
+  });
+});
 
 /* ── FADE-UP OBSERVER ── */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.1});
+},{root:scrollRoot===window?null:scrollRoot,threshold:.1});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 
 /* ── MODAL DATA ── */
